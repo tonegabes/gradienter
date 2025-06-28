@@ -15,7 +15,6 @@ import {
   ArrowUp,
   ArrowUpLeft,
   ArrowUpRight,
-  Code,
   Copy
 } from "phosphor-react";
 import { useState } from "react";
@@ -117,9 +116,24 @@ export function GradientCard({ gradient }: GradientCardProps) {
       <div className="flex flex-col justify-between grow">
         {/* Cores Individuais */}
         <div className="space-y-2 p-4">
-          <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-            Cores Tailwind
-          </p>
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
+              Cores Tailwind
+            </p>
+            <button
+              onClick={handleCopyColors}
+              className="flex items-center justify-center gap-2 text-slate-400 hover:text-slate-800 hover:bg-slate-50 transition-all duration-200"
+              title="Copiar cores"
+            >
+              <Copy
+                size={16}
+                weight={copyStatus === "colors" ? "fill" : "regular"}
+              />
+              <span className="text-xs font-medium">
+                {copyStatus === "colors" ? "Copiado!" : ""}
+              </span>
+            </button>
+          </div>
           <p className="font-mono text-sm text-slate-800 bg-slate-50 rounded-md px-3 py-2 leading-relaxed">
             {formatTailwindColorsDisplay(gradient.colors)}
           </p>
@@ -129,37 +143,30 @@ export function GradientCard({ gradient }: GradientCardProps) {
 
         {/* Classes Tailwind */}
         <div className="space-y-2 p-4">
-          <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-            Classes Tailwind
-          </p>
+
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
+              Classes Tailwind
+            </p>
+
+            <button
+              onClick={handleCopyClasses}
+              className="flex items-center justify-center gap-2 text-slate-400 hover:text-slate-800 hover:bg-slate-50 transition-all duration-200"
+              title="Copiar classes"
+            >
+              <Copy
+                size={16}
+                weight={copyStatus === "classes" ? "fill" : "regular"}
+              />
+              <span className="text-xs font-medium">
+                {copyStatus === "classes" ? "Copiado!" : ""}
+              </span>
+            </button>
+          </div>
 
           <p className="font-mono text-xs text-slate-700 bg-slate-50 rounded-md px-3 py-2 leading-relaxed break-all">
             {gradient.tailwindClasses}
           </p>
-        </div>
-
-        {/* Botões de Cópia */}
-        <div className="flex border-t border-gray-100">
-          <button
-            onClick={handleCopyColors}
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 text-slate-600 hover:text-slate-800 hover:bg-slate-50 transition-all duration-200 border-r border-gray-100"
-            title="Copiar cores"
-          >
-            <Copy size={16} weight={copyStatus === 'colors' ? 'fill' : 'regular'} />
-            <span className="text-xs font-medium">
-              {copyStatus === "colors" ? "Copiado!" : "Cores"}
-            </span>
-          </button>
-          <button
-            onClick={handleCopyClasses}
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 text-slate-600 hover:text-slate-800 hover:bg-slate-50 transition-all duration-200"
-            title="Copiar classes"
-          >
-            <Code size={16} weight={copyStatus === 'classes' ? 'fill' : 'regular'} />
-            <span className="text-xs font-medium">
-              {copyStatus === "classes" ? "Copiado!" : "Classes"}
-            </span>
-          </button>
         </div>
       </div>
     </div>
