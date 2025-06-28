@@ -14,7 +14,9 @@ import {
   ArrowRight,
   ArrowUp,
   ArrowUpLeft,
-  ArrowUpRight
+  ArrowUpRight,
+  Code,
+  Copy
 } from "phosphor-react";
 import { useState } from "react";
 
@@ -52,7 +54,7 @@ const DirectionNames = {
  * Inclui funcionalidade de cópia e exibição de informações detalhadas
  */
 export function GradientCard({ gradient }: GradientCardProps) {
-  const [copyStatus, setCopyStatus] = useState<'colors' | 'classes' | null>(null);
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'colors' | 'classes'>('idle');
 
   /**
    * Copia as cores do gradiente para o clipboard
@@ -63,7 +65,7 @@ export function GradientCard({ gradient }: GradientCardProps) {
 
     if (success) {
       setCopyStatus('colors');
-      setTimeout(() => setCopyStatus(null), 2000);
+      setTimeout(() => setCopyStatus('idle'), 2000);
     }
   };
 
@@ -75,7 +77,7 @@ export function GradientCard({ gradient }: GradientCardProps) {
 
     if (success) {
       setCopyStatus('classes');
-      setTimeout(() => setCopyStatus(null), 2000);
+      setTimeout(() => setCopyStatus('idle'), 2000);
     }
   };
 
@@ -109,22 +111,6 @@ export function GradientCard({ gradient }: GradientCardProps) {
       >
         {/* Overlay de Hover */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
-
-        {/* Botões de Cópia no Bottom */}
-        <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <button
-            onClick={handleCopyColors}
-            className="flex-1 px-3 py-2 bg-white/95 text-slate-700 rounded-lg font-medium text-sm shadow-lg hover:bg-white transition-all duration-200 backdrop-blur-sm border border-white/50"
-          >
-            {copyStatus === "colors" ? "✓ Copiado!" : "Copiar Cores"}
-          </button>
-          <button
-            onClick={handleCopyClasses}
-            className="flex-1 px-3 py-2 bg-slate-800/95 text-white rounded-lg font-medium text-sm shadow-lg hover:bg-slate-800 transition-all duration-200 backdrop-blur-sm"
-          >
-            {copyStatus === "classes" ? "✓ Copiado!" : "Copiar Classes"}
-          </button>
-        </div>
       </div>
 
       {/* Informações do Gradiente */}
@@ -150,6 +136,30 @@ export function GradientCard({ gradient }: GradientCardProps) {
           <p className="font-mono text-xs text-slate-700 bg-slate-50 rounded-md px-3 py-2 leading-relaxed break-all">
             {gradient.tailwindClasses}
           </p>
+        </div>
+
+        {/* Botões de Cópia */}
+        <div className="flex border-t border-gray-100">
+          <button
+            onClick={handleCopyColors}
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 text-slate-600 hover:text-slate-800 hover:bg-slate-50 transition-all duration-200 border-r border-gray-100"
+            title="Copiar cores"
+          >
+            <Copy size={16} weight={copyStatus === 'colors' ? 'fill' : 'regular'} />
+            <span className="text-xs font-medium">
+              {copyStatus === "colors" ? "Copiado!" : "Cores"}
+            </span>
+          </button>
+          <button
+            onClick={handleCopyClasses}
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 text-slate-600 hover:text-slate-800 hover:bg-slate-50 transition-all duration-200"
+            title="Copiar classes"
+          >
+            <Code size={16} weight={copyStatus === 'classes' ? 'fill' : 'regular'} />
+            <span className="text-xs font-medium">
+              {copyStatus === "classes" ? "Copiado!" : "Classes"}
+            </span>
+          </button>
         </div>
       </div>
     </div>
