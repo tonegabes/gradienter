@@ -76,30 +76,49 @@ A **Single Page Application (SPA)** built with Next.js 14+ that generates 100 gr
    http://localhost:3000
    ```
 
-## 🚀 Deployment
+## 📚 Documentation
+
+### 🚀 [Deployment Guide](docs/DEPLOYMENT.md)
+Complete guide for deploying to GitHub Pages with:
+- Automated GitHub Actions deployment
+- Manual deployment options
+- Troubleshooting common issues
+- Performance optimization tips
+
+### 🛠️ [Development Guide](docs/DEVELOPMENT.md)
+Local development setup and best practices:
+- Project structure overview
+- Development workflow
+- Code quality standards
+- Testing and debugging
+
+## 🚀 Quick Deployment
 
 ### GitHub Pages (Automatic)
 
-This project is configured with **GitHub Actions** for automatic deployment to GitHub Pages:
+This project is configured with **GitHub Actions** for automatic deployment:
 
-1. **Push to main branch** - Deployment triggers automatically
-2. **Manual deployment** - Use "Actions" tab in GitHub repository
-3. **Live URL** - Available at `https://username.github.io/gradienter/`
+```bash
+# Deploy automatically
+git push origin main
+```
 
-The workflow (`/.github/workflows/deploy.yml`) handles:
-- ✅ Next.js static export
-- ✅ Optimized build process
+The workflow handles:
+- ✅ Next.js static export with enhanced caching
+- ✅ Optimized build process with linting
 - ✅ Automatic deployment to GitHub Pages
-- ✅ Caching for faster builds
+- ✅ Build verification and error handling
+
+**📖 For detailed deployment instructions, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**
 
 ### Manual Deployment
 
 ```bash
-# Build for production
-npm run build
+# Quick manual deployment
+npm run deploy:manual
 
-# The static files will be in the 'out' directory
-# Deploy the 'out' folder to any static hosting service
+# Or build only
+npm run build
 ```
 
 ## 🏗️ Project Structure
@@ -164,22 +183,34 @@ Copies colors or classes to clipboard with feedback.
 
 ## 🔧 Available Scripts
 
+### Development
 ```bash
-# Development
-npm run dev
-
-# Production build
-npm run build
-
-# Run production build
-npm start
-
-# Linting
-npm run lint
-
-# Type checking
-npm run type-check
+npm run dev          # Start development server with Turbopack
+npm run build        # Build for production
+npm run preview      # Build and serve locally
+npm start            # Start production server (not used for static export)
 ```
+
+### Code Quality
+```bash
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues automatically
+npm run type-check   # Run TypeScript compiler check
+```
+
+### Deployment
+```bash
+npm run deploy       # Build for deployment
+npm run deploy:manual # Manual deployment to GitHub Pages
+```
+
+### Maintenance
+```bash
+npm run clean        # Clean build artifacts and cache
+npm run reinstall    # Full dependency reinstall
+```
+
+**📖 For detailed script usage, see [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)**
 
 ## 🎨 Customization
 
