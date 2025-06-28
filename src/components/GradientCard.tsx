@@ -5,22 +5,81 @@ import { GradientCardProps } from "@/types";
 import { useState } from "react";
 
 /**
+ * Ícones SVG para direções de gradiente
+ */
+const DirectionIcons = {
+  'bg-gradient-to-t': (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+      <path d="M8 1l4 4h-2v6H6V5H4l4-4z"/>
+    </svg>
+  ),
+  'bg-gradient-to-tr': (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+      <path d="M11.5 1.5L15 5l-1 1-2.5-2.5V11H10V3.5L7.5 6l-1-1L10 1.5h1.5z"/>
+    </svg>
+  ),
+  'bg-gradient-to-r': (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+      <path d="M15 8l-4-4v2H5v4h6v2l4-4z"/>
+    </svg>
+  ),
+  'bg-gradient-to-br': (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+      <path d="M11.5 14.5L15 11l-1-1-2.5 2.5V5H10v7.5L7.5 10l-1 1 3.5 3.5h1.5z"/>
+    </svg>
+  ),
+  'bg-gradient-to-b': (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+      <path d="M8 15l-4-4h2V5h4v6h2l-4 4z"/>
+    </svg>
+  ),
+  'bg-gradient-to-bl': (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+      <path d="M4.5 14.5L1 11l1-1 2.5 2.5V5H6v7.5L8.5 10l1 1-3.5 3.5H4.5z"/>
+    </svg>
+  ),
+  'bg-gradient-to-l': (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+      <path d="M1 8l4 4V10h6V6H5V4l-4 4z"/>
+    </svg>
+  ),
+  'bg-gradient-to-tl': (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">
+      <path d="M4.5 1.5L1 5l1 1 2.5-2.5V11H6V3.5L8.5 6l1-1L6 1.5H4.5z"/>
+    </svg>
+  ),
+};
+
+/**
+ * Labels para tooltip das direções
+ */
+const DirectionLabels = {
+  'bg-gradient-to-t': 'Para cima',
+  'bg-gradient-to-tr': 'Para cima-direita',
+  'bg-gradient-to-r': 'Para direita',
+  'bg-gradient-to-br': 'Para baixo-direita',
+  'bg-gradient-to-b': 'Para baixo',
+  'bg-gradient-to-bl': 'Para baixo-esquerda',
+  'bg-gradient-to-l': 'Para esquerda',
+  'bg-gradient-to-tl': 'Para cima-esquerda',
+};
+
+/**
  * Componente que renderiza um card individual com gradiente Tailwind
  * Proporção 16:9 com cores Tailwind exibidas abaixo
  */
 export function GradientCard({ gradient, index }: GradientCardProps) {
-  const [copied, setCopied] = useState(false);
-  const [copyType, setCopyType] = useState<'colors' | 'classes'>('colors');
+  const [copied, setCopied] = useState<'colors' | 'classes' | null>(null);
 
   /**
    * Copia as cores ou classes Tailwind para a área de transferência
    */
   const handleCopyColors = async () => {
-    const success = await copyToClipboard(gradient.colors.join(', '));
+    const colorsText = gradient.colors.join(', ');
+    const success = await copyToClipboard(colorsText);
     if (success) {
-      setCopied(true);
-      setCopyType('colors');
-      setTimeout(() => setCopied(false), 2000);
+      setCopied('colors');
+      setTimeout(() => setCopied(null), 2000);
     }
   };
 
@@ -30,10 +89,16 @@ export function GradientCard({ gradient, index }: GradientCardProps) {
   const handleCopyClasses = async () => {
     const success = await copyToClipboard(gradient.tailwindClasses);
     if (success) {
-      setCopied(true);
-      setCopyType('classes');
-      setTimeout(() => setCopied(false), 2000);
+      setCopied('classes');
+      setTimeout(() => setCopied(null), 2000);
     }
+  };
+
+  /**
+   * Copia as cores quando clica no gradiente
+   */
+  const handleGradientClick = () => {
+    handleCopyColors();
   };
 
   // Gera CSS a partir das cores Tailwind para o background
@@ -51,21 +116,21 @@ export function GradientCard({ gradient, index }: GradientCardProps) {
       <div
         className="aspect-video w-full cursor-pointer relative"
         style={{ background: cssGradient }}
-        onClick={handleCopyColors}
+        onClick={handleGradientClick}
         role="button"
         tabIndex={0}
         aria-label={`Gradiente ${index ? index + 1 : ''} - Clique para copiar cores`}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            handleCopyColors();
+            handleGradientClick();
           }
         }}
       >
         {/* Overlay com feedback de cópia */}
         {copied && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white font-medium">
-            {copyType === 'colors' ? 'Cores copiadas!' : 'Classes copiadas!'}
+            {copied === 'colors' ? 'Cores copiadas!' : 'Classes copiadas!'}
           </div>
         )}
 
@@ -94,9 +159,15 @@ export function GradientCard({ gradient, index }: GradientCardProps) {
           <p className="text-sm font-medium text-gray-700 mb-1">
             {formatTailwindColorsDisplay(gradient.colors)}
           </p>
-          <p className="text-xs text-gray-500">
-            Direção: {gradient.directionLabel}
-          </p>
+          <div className="flex items-center gap-2 text-xs text-gray-500">
+            <div
+              className="flex items-center gap-1 text-gray-600"
+              title={DirectionLabels[gradient.direction as keyof typeof DirectionLabels]}
+            >
+              {DirectionIcons[gradient.direction as keyof typeof DirectionIcons]}
+              <span>{DirectionLabels[gradient.direction as keyof typeof DirectionLabels]}</span>
+            </div>
+          </div>
         </div>
 
         {/* Classes Tailwind */}
@@ -141,15 +212,23 @@ export function GradientCard({ gradient, index }: GradientCardProps) {
         <div className="flex gap-2 pt-2">
           <button
             onClick={handleCopyColors}
-            className="flex-1 text-xs bg-blue-50 hover:bg-blue-100 text-blue-600 py-1 px-2 rounded transition-colors"
+            className={`flex-1 text-xs py-1 px-2 rounded transition-colors ${
+              copied === 'colors'
+                ? 'bg-green-100 text-green-700'
+                : 'bg-blue-50 hover:bg-blue-100 text-blue-600'
+            }`}
           >
-            Copiar Cores
+            {copied === 'colors' ? '✓ Copiado!' : 'Copiar Cores'}
           </button>
           <button
             onClick={handleCopyClasses}
-            className="flex-1 text-xs bg-purple-50 hover:bg-purple-100 text-purple-600 py-1 px-2 rounded transition-colors"
+            className={`flex-1 text-xs py-1 px-2 rounded transition-colors ${
+              copied === 'classes'
+                ? 'bg-green-100 text-green-700'
+                : 'bg-purple-50 hover:bg-purple-100 text-purple-600'
+            }`}
           >
-            Copiar Classes
+            {copied === 'classes' ? '✓ Copiado!' : 'Copiar Classes'}
           </button>
         </div>
       </div>
