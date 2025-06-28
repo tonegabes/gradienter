@@ -100,9 +100,9 @@ export function GradientCard({ gradient }: GradientCardProps) {
         </div>
       </div>
 
-            {/* Área do Gradiente */}
+                  {/* Área do Gradiente */}
       <div
-        className={`w-full aspect-square ${gradient.tailwindClasses} relative overflow-hidden`}
+        className={`w-full aspect-[2/1] ${gradient.tailwindClasses} relative overflow-hidden`}
         style={{ background: cssGradient }}
       >
         {/* Overlay de Hover */}
