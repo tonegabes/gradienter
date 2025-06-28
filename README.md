@@ -1,217 +1,244 @@
-# 🎨 Gerador de Gradientes Tailwind CSS
+# 🎨 Tailwind CSS Gradient Generator
 
-Uma **Single Page Application (SPA)** em Next.js 14+ que gera 100 cards com gradientes usando apenas **cores oficiais do Tailwind CSS**. Cada card possui proporção 16:9 e exibe as cores Tailwind e classes prontas para usar.
+A **Single Page Application (SPA)** built with Next.js 14+ that generates 100 gradient cards using only **official Tailwind CSS colors**. Each card has a 16:10 aspect ratio and displays Tailwind colors and ready-to-use classes.
 
 ![Next.js](https://img.shields.io/badge/Next.js-14+-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-blue?style=flat-square&logo=tailwindcss)
-![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-black?style=flat-square)
+![Phosphor Icons](https://img.shields.io/badge/Phosphor%20Icons-green?style=flat-square)
 
-## ✨ Funcionalidades
+## 🌐 Live Demo
 
-### 🎯 Principais
-- **100 cards únicos** gerados a cada carregamento
-- **Cores Tailwind oficiais** (slate, gray, blue, red, green, etc.)
-- **Gradientes Tailwind** com 2-3 cores cada
-- **Proporção 16:9** para todos os cards
-- **Classes Tailwind** prontas para copiar e usar
-- **Direções variadas** (to-r, to-br, to-tl, etc.)
+🚀 **[View Live Demo on GitHub Pages](https://username.github.io/gradienter/)**
 
-### 🖱️ Interatividade
-- **Clique para copiar cores** Tailwind (ex: blue-500, red-400)
-- **Clique para copiar classes** completas (ex: bg-gradient-to-r from-blue-500 to-red-400)
-- **Hover effects** suaves com animações
-- **Feedback visual** ao copiar
-- **Interface totalmente responsiva**
+## ✨ Features
 
-### 📱 Responsividade
-- **Desktop**: 4 colunas
-- **Tablet**: 3 colunas
-- **Mobile**: 2 colunas
-- **Mobile pequeno**: 1 coluna
+### 🎯 Core Features
+- **100 unique cards** with deterministic generation (no hydration issues)
+- **Official Tailwind colors** (slate, gray, blue, red, green, etc.)
+- **Tailwind gradients** with 2-3 colors each
+- **16:10 aspect ratio** for all cards
+- **Ready-to-use Tailwind classes** for copy and paste
+- **8 gradient directions** with Phosphor Icons
+- **Deterministic generation** - same results on server and client
 
-## 🚀 Tecnologias Utilizadas
+### 🖱️ Interactivity
+- **Copy colors** - Individual Tailwind colors (e.g., blue-500, red-400)
+- **Copy classes** - Complete gradient classes (e.g., bg-gradient-to-r from-blue-500 to-red-400)
+- **Visual feedback** when copying
+- **Phosphor Icons** for gradient directions
+- **Smooth hover effects** and animations
+- **Fully responsive interface**
 
-- **Next.js 14+** - Framework React com App Router
-- **TypeScript** - Tipagem estática
-- **Tailwind CSS** - Framework CSS (cores utilizadas nos gradientes)
-- **shadcn/ui** - Componentes reutilizáveis
-- **Inter & Fira Code** - Fontes do Google Fonts
+### 📱 Responsive Design
+- **Desktop**: 4 columns
+- **Tablet**: 3 columns
+- **Mobile**: 2 columns
+- **Small Mobile**: 1 column
 
-## 📦 Instalação
+## 🚀 Technologies Used
 
-### Pré-requisitos
+- **Next.js 14+** - React framework with App Router
+- **TypeScript** - Static typing
+- **Tailwind CSS** - CSS framework (colors used in gradients)
+- **Phosphor Icons** - Icon library for direction indicators
+- **Inter & Fira Code** - Google Fonts
+
+## 📦 Installation
+
+### Prerequisites
 - Node.js 18+
-- npm ou yarn
+- npm or yarn
 
-### Passos
-1. **Clone o repositório**
+### Steps
+1. **Clone the repository**
    ```bash
-   git clone <url-do-repositorio>
+   git clone <repository-url>
    cd gradienter
    ```
 
-2. **Instale as dependências**
+2. **Install dependencies**
    ```bash
    npm install
-   # ou
+   # or
    yarn install
    ```
 
-3. **Execute em modo desenvolvimento**
+3. **Run in development mode**
    ```bash
    npm run dev
-   # ou
+   # or
    yarn dev
    ```
 
-4. **Acesse no navegador**
+4. **Open in browser**
    ```
    http://localhost:3000
    ```
 
-## 🏗️ Estrutura do Projeto
+## 🚀 Deployment
+
+### GitHub Pages (Automatic)
+
+This project is configured with **GitHub Actions** for automatic deployment to GitHub Pages:
+
+1. **Push to main branch** - Deployment triggers automatically
+2. **Manual deployment** - Use "Actions" tab in GitHub repository
+3. **Live URL** - Available at `https://username.github.io/gradienter/`
+
+The workflow (`/.github/workflows/deploy.yml`) handles:
+- ✅ Next.js static export
+- ✅ Optimized build process
+- ✅ Automatic deployment to GitHub Pages
+- ✅ Caching for faster builds
+
+### Manual Deployment
+
+```bash
+# Build for production
+npm run build
+
+# The static files will be in the 'out' directory
+# Deploy the 'out' folder to any static hosting service
+```
+
+## 🏗️ Project Structure
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx          # Layout principal
-│   ├── page.tsx           # Página principal
-│   └── globals.css        # Estilos globais
+│   ├── layout.tsx          # Main layout
+│   ├── page.tsx           # Main page
+│   └── globals.css        # Global styles
 ├── components/
-│   ├── GradientCard.tsx   # Card individual Tailwind
-│   └── GradientGrid.tsx   # Grid de cards
+│   ├── GradientCard.tsx   # Individual Tailwind card
+│   └── GradientGrid.tsx   # Cards grid
 ├── lib/
-│   └── utils.ts           # Funções utilitárias Tailwind
+│   └── utils.ts           # Tailwind utility functions
 └── types/
-    └── index.ts           # Definições TypeScript
+    └── index.ts           # TypeScript definitions
 ```
 
-## 🎨 Componentes
+## 🎨 Components
 
 ### `GradientCard`
-Renderiza um card individual com:
-- Gradiente CSS gerado a partir de cores Tailwind
-- Proporção 16:9
-- Cores Tailwind listadas (ex: blue-500, red-400)
-- Classes Tailwind completas para copiar
-- Círculos coloridos representando cada cor
-- Botões para copiar cores ou classes
+Renders an individual card with:
+- CSS gradient generated from Tailwind colors
+- 16:10 aspect ratio
+- Listed Tailwind colors (e.g., blue-500, red-400)
+- Complete Tailwind classes for copying
+- Phosphor Icons for gradient directions
+- Copy buttons for colors and classes
 
 ### `GradientGrid`
-Organiza os cards em:
-- Grid responsivo
-- 100 cards por página
-- Header com estatísticas
-- Footer com informações Tailwind
+Organizes cards in:
+- Responsive grid layout
+- 100 cards per page
+- Header with statistics
+- Footer with Tailwind information
 
-## 🛠️ Funções Utilitárias
+## 🛠️ Utility Functions
 
-### `generateRandomTailwindColor()`
-Gera uma cor Tailwind aleatória válida (ex: "blue-500").
+### `generateSeededTailwindColor()`
+Generates deterministic Tailwind colors based on seed.
 
-### `generateRandomTailwindGradient()`
-Cria configuração completa de gradiente Tailwind com:
-- 2-3 cores Tailwind aleatórias
-- Direção Tailwind aleatória
-- Classes CSS prontas para usar
+### `generateSeededTailwindGradient()`
+Creates complete Tailwind gradient configuration with:
+- 2-3 deterministic Tailwind colors
+- Random Tailwind direction
+- Ready-to-use CSS classes
 
 ### `generateCSSFromTailwindColors()`
-Converte cores Tailwind para CSS válido para preview.
+Converts Tailwind colors to valid CSS for preview.
 
 ### `copyToClipboard()`
-Copia cores ou classes para área de transferência.
+Copies colors or classes to clipboard with feedback.
 
-## 🎯 Como Usar
+## 🎯 How to Use
 
-1. **Visualizar Gradientes**: A página carrega automaticamente com 100 gradientes únicos usando cores Tailwind
-2. **Copiar Cores**: Clique no botão "Copiar Cores" para copiar as cores Tailwind (ex: blue-500, red-400)
-3. **Copiar Classes**: Clique no botão "Copiar Classes" para copiar as classes completas (ex: bg-gradient-to-r from-blue-500 to-red-400)
-4. **Usar no Projeto**: Cole as classes diretamente no seu HTML/JSX
-5. **Gerar Novos**: Atualize a página (F5) para novos gradientes
+1. **View Gradients**: Page automatically loads with 100 unique gradients using Tailwind colors
+2. **Copy Colors**: Click the copy icon next to colors to copy Tailwind color names (e.g., blue-500, red-400)
+3. **Copy Classes**: Click the copy icon next to classes to copy complete gradient classes (e.g., bg-gradient-to-r from-blue-500 to-red-400)
+4. **Use in Project**: Paste classes directly into your HTML/JSX
+5. **Direction Icons**: Phosphor Icons show gradient direction visually
 
-## 🔧 Scripts Disponíveis
+## 🔧 Available Scripts
 
 ```bash
-# Desenvolvimento
+# Development
 npm run dev
 
-# Build para produção
+# Production build
 npm run build
 
-# Executar build de produção
+# Run production build
 npm start
 
 # Linting
 npm run lint
 
-# Verificação de tipos
+# Type checking
 npm run type-check
 ```
 
-## 🎨 Personalização
+## 🎨 Customization
 
-### Modificar Quantidade de Cards
-No arquivo `src/app/page.tsx`:
+### Modify Card Count
+In `src/app/page.tsx`:
 ```tsx
-<GradientGrid cardCount={100} /> // Altere o número
+<GradientGrid cardCount={100} /> // Change the number
 ```
 
-### Adicionar Novas Cores Tailwind
-No arquivo `src/lib/utils.ts`, adicione na constante `TAILWIND_COLORS`:
+### Add New Tailwind Colors
+In `src/lib/utils.ts`, add to `TAILWIND_COLORS` constant:
 ```tsx
 const TAILWIND_COLORS = {
-  // ... cores existentes
+  // ... existing colors
   newcolor: ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'],
 };
 ```
 
-### Personalizar Direções
-Modifique a constante `TAILWIND_DIRECTIONS` em `src/lib/utils.ts`.
+### Customize Directions
+Modify the `TAILWIND_DIRECTIONS` constant in `src/lib/utils.ts`.
 
-## 📊 Performance
+## 📊 Performance Features
 
-- **Geração otimizada** com `useMemo`
-- **Cores Tailwind nativas** para melhor performance
-- **CSS gerado dinamicamente** apenas para preview
-- **Tailwind JIT** para bundle otimizado
-- **Fontes otimizadas** do Google Fonts
+- **Deterministic generation** with seeded random (no hydration issues)
+- **Native Tailwind colors** for optimal performance
+- **Dynamic CSS generation** only for preview
+- **Tailwind JIT** for optimized bundle
+- **Optimized Google Fonts** loading
+- **Static export** for fast loading
 
-## 🌟 Destaques Técnicos
+## 🌟 Technical Highlights
 
-- ✅ **100% cores Tailwind** oficiais
-- ✅ **Classes prontas** para usar
-- ✅ **TypeScript** bem tipado
-- ✅ **Mobile-first** design
-- ✅ **Acessibilidade** com ARIA labels
-- ✅ **Performance** otimizada
-- ✅ **Código limpo** e comentado
+- ✅ **100% official Tailwind colors**
+- ✅ **Ready-to-use classes**
+- ✅ **Well-typed TypeScript**
+- ✅ **Mobile-first design**
+- ✅ **Accessibility** with ARIA labels
+- ✅ **Performance optimized**
+- ✅ **Clean, commented code**
+- ✅ **No hydration issues**
+- ✅ **GitHub Pages ready**
 
-## 🎨 Cores Tailwind Disponíveis
+## 🎨 Available Tailwind Colors
 
-**Neutras**: slate, gray, zinc, neutral, stone
-**Vermelhas**: red, rose
-**Laranjas**: orange, amber
-**Amarelas**: yellow, lime
-**Verdes**: green, emerald, teal
-**Azuis**: cyan, sky, blue, indigo
-**Roxas**: violet, purple, fuchsia
-**Rosas**: pink
+**Neutrals**: slate, gray, zinc, neutral, stone
+**Reds**: red, rose
+**Oranges**: orange, amber
+**Yellows**: yellow, lime
+**Greens**: green, emerald, teal
+**Blues**: cyan, sky, blue, indigo
+**Purples**: violet, purple, fuchsia
+**Pinks**: pink
 
-Cada cor tem 11 tons: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
+Each color family includes shades: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
 
-## 🤝 Contribuição
+## 📝 License
 
-1. Fork o projeto
-2. Crie uma branch para sua feature
-3. Commit suas mudanças
-4. Push para a branch
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para detalhes.
+This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-**Desenvolvido com ❤️ usando Next.js, TypeScript e Tailwind CSS**
+**Developed with ❤️ using Next.js, TypeScript and Tailwind CSS**
