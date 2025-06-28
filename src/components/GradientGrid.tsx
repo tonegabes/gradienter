@@ -6,13 +6,13 @@ import { useMemo } from "react";
 import { GradientCard } from "./GradientCard";
 
 /**
- * Componente que renderiza um grid responsivo com cards de gradientes Tailwind
- * Gera gradientes determinísticos baseados no índice de cada card
+ * Component that renders a responsive grid with Tailwind gradient cards
+ * Generates deterministic gradients based on each card's index
  */
 export function GradientGrid({ cardCount = 100 }: GradientGridProps) {
   /**
-   * Gera gradientes Tailwind determinísticos baseados no índice
-   * Isso garante que o servidor e cliente gerem os mesmos gradientes
+   * Generates deterministic Tailwind gradients based on index
+   * This ensures server and client generate the same gradients
    */
   const gradients = useMemo<TailwindGradientConfig[]>(() => {
     const newGradients: TailwindGradientConfig[] = [];
@@ -24,7 +24,7 @@ export function GradientGrid({ cardCount = 100 }: GradientGridProps) {
     return newGradients;
   }, [cardCount]);
 
-  // Estatísticas dos gradientes
+  // Gradient statistics
   const stats = useMemo(() => {
     const totalColors = gradients.reduce((acc, gradient) => acc + gradient.colors.length, 0);
     const directionsUsed = new Set(gradients.map(g => g.direction)).size;
@@ -39,36 +39,36 @@ export function GradientGrid({ cardCount = 100 }: GradientGridProps) {
 
   return (
     <div className="w-full">
-      {/* Header com informações */}
+      {/* Header with information */}
       <div className="mb-8 text-center">
         <div className="flex items-center justify-center gap-2 mb-4">
           <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">TW</span>
           </div>
           <h1 className="text-4xl font-bold text-gray-900">
-            Gerador de Gradientes Tailwind
+            Tailwind Gradient Generator
           </h1>
         </div>
         <p className="text-lg text-gray-600 mb-4">
-          {cardCount} gradientes únicos usando cores do Tailwind CSS
+          {cardCount} unique gradients using Tailwind CSS colors
         </p>
         <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 mb-4">
           <span className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full">
-            🎨 {stats.colorsUsed} cores diferentes
+            🎨 {stats.colorsUsed} different colors
           </span>
           <span className="bg-purple-50 text-purple-600 px-3 py-1 rounded-full">
-            🧭 {stats.directionsUsed} direções
+            🧭 {stats.directionsUsed} directions
           </span>
           <span className="bg-green-50 text-green-600 px-3 py-1 rounded-full">
-            ⚡ Classes prontas para usar
+            ⚡ Ready-to-use classes
           </span>
         </div>
         <p className="text-sm text-gray-500">
-          Clique nos cards para copiar cores ou classes • Gradientes determinísticos (sem hidratação)
+          Click on cards to copy colors or classes • Deterministic gradients (no hydration issues)
         </p>
       </div>
 
-      {/* Grid responsivo de cards */}
+      {/* Responsive cards grid */}
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {gradients.map((gradient, index) => (
           <GradientCard
@@ -79,33 +79,33 @@ export function GradientGrid({ cardCount = 100 }: GradientGridProps) {
         ))}
       </div>
 
-      {/* Footer com estatísticas e informações */}
+      {/* Footer with statistics and information */}
       <div className="mt-12 pt-8 border-t border-gray-200">
         <div className="text-center space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="text-2xl font-bold text-gray-800">{stats.totalColors}</div>
-              <div className="text-sm text-gray-600">Total de cores aplicadas</div>
+              <div className="text-sm text-gray-600">Total colors applied</div>
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="text-2xl font-bold text-gray-800">{stats.colorsUsed}</div>
-              <div className="text-sm text-gray-600">Cores Tailwind únicas</div>
+              <div className="text-sm text-gray-600">Unique Tailwind colors</div>
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="text-2xl font-bold text-gray-800">{stats.directionsUsed}</div>
-              <div className="text-sm text-gray-600">Direções de gradiente</div>
+              <div className="text-sm text-gray-600">Gradient directions</div>
             </div>
           </div>
 
           <div className="text-sm text-gray-500 space-y-2">
             <p>
-              Todos os gradientes usam apenas cores oficiais do Tailwind CSS
+              All gradients use only official Tailwind CSS colors
             </p>
             <p className="font-mono text-xs bg-gray-100 inline-block px-2 py-1 rounded">
-              Exemplo: bg-gradient-to-r from-blue-500 to-purple-600
+              Example: bg-gradient-to-r from-blue-500 to-purple-600
             </p>
             <p className="text-xs text-green-600">
-              ✅ Sem problemas de hidratação - Gradientes determinísticos
+              ✅ No hydration issues - Deterministic gradients
             </p>
           </div>
         </div>

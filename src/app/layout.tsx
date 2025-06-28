@@ -13,9 +13,9 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Gerador de Gradientes Tailwind | 100 Cards com Cores Tailwind CSS",
-  description: "Aplicação que gera 100 cards com gradientes usando apenas cores oficiais do Tailwind CSS. Cada card mostra as cores e classes Tailwind prontas para usar. Clique para copiar cores ou classes.",
-  keywords: ["tailwind", "gradientes", "tailwind css", "cores", "design", "CSS", "Next.js", "classes tailwind"],
+  title: "Tailwind Gradient Generator | 100 Cards with Tailwind CSS Colors",
+  description: "Application that generates 100 gradient cards using only official Tailwind CSS colors. Each card shows colors and ready-to-use Tailwind classes. Click to copy colors or classes.",
+  keywords: ["tailwind", "gradients", "tailwind css", "colors", "design", "CSS", "Next.js", "tailwind classes"],
   authors: [{ name: "Tailwind Gradient Generator" }],
   viewport: "width=device-width, initial-scale=1",
 };
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <body
         className={`${inter.variable} ${firaCode.variable} antialiased font-sans`}
       >

@@ -1,8 +1,8 @@
 import { GradientGrid } from "@/components/GradientGrid";
 
 /**
- * Página principal da aplicação
- * Renderiza o grid com 100 gradientes Tailwind aleatórios
+ * Main application page
+ * Renders grid with 100 random Tailwind gradients
  */
 export default function Home() {
   return (

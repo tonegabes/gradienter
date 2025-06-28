@@ -35,17 +35,17 @@ const DirectionIcons = {
 };
 
 /**
- * Nomes descritivos para direções de gradiente
+ * Descriptive names for gradient directions
  */
 const DirectionNames = {
-  'bg-gradient-to-t': 'Para cima',
-  'bg-gradient-to-tr': 'Para cima-direita',
-  'bg-gradient-to-r': 'Para direita',
-  'bg-gradient-to-br': 'Para baixo-direita',
-  'bg-gradient-to-b': 'Para baixo',
-  'bg-gradient-to-bl': 'Para baixo-esquerda',
-  'bg-gradient-to-l': 'Para esquerda',
-  'bg-gradient-to-tl': 'Para cima-esquerda',
+  'bg-gradient-to-t': 'To top',
+  'bg-gradient-to-tr': 'To top-right',
+  'bg-gradient-to-r': 'To right',
+  'bg-gradient-to-br': 'To bottom-right',
+  'bg-gradient-to-b': 'To bottom',
+  'bg-gradient-to-bl': 'To bottom-left',
+  'bg-gradient-to-l': 'To left',
+  'bg-gradient-to-tl': 'To top-left',
 };
 
 /**
@@ -117,21 +117,21 @@ export function GradientCard({ gradient }: GradientCardProps) {
         {/* Cores Individuais */}
         <div className="space-y-2 p-4">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-              Cores Tailwind
-            </p>
+                          <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
+                Tailwind Colors
+              </p>
             <button
               onClick={handleCopyColors}
               className="flex items-center justify-center gap-2 text-slate-400 hover:text-slate-800 hover:bg-slate-50 transition-all duration-200"
-              title="Copiar cores"
+                             title="Copy colors"
             >
               <Copy
                 size={16}
                 weight={copyStatus === "colors" ? "fill" : "regular"}
               />
-              <span className="text-xs font-medium">
-                {copyStatus === "colors" ? "Copiado!" : ""}
-              </span>
+                             <span className="text-xs font-medium">
+                 {copyStatus === "colors" ? "Copied!" : ""}
+               </span>
             </button>
           </div>
           <p className="font-mono text-sm text-slate-800 bg-slate-50 rounded-md px-3 py-2 leading-relaxed">
@@ -145,22 +145,22 @@ export function GradientCard({ gradient }: GradientCardProps) {
         <div className="space-y-2 p-4">
 
           <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
-              Classes Tailwind
-            </p>
+                          <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
+                Tailwind Classes
+              </p>
 
             <button
               onClick={handleCopyClasses}
               className="flex items-center justify-center gap-2 text-slate-400 hover:text-slate-800 hover:bg-slate-50 transition-all duration-200"
-              title="Copiar classes"
+                             title="Copy classes"
             >
               <Copy
                 size={16}
                 weight={copyStatus === "classes" ? "fill" : "regular"}
               />
-              <span className="text-xs font-medium">
-                {copyStatus === "classes" ? "Copiado!" : ""}
-              </span>
+                             <span className="text-xs font-medium">
+                 {copyStatus === "classes" ? "Copied!" : ""}
+               </span>
             </button>
           </div>
 
