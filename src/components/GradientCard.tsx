@@ -1,20 +1,20 @@
 "use client";
 
 import {
-    copyToClipboard,
-    formatTailwindColorsDisplay,
-    generateCSSFromTailwindColors
+  copyToClipboard,
+  formatTailwindColorsDisplay,
+  generateCSSFromTailwindColors
 } from "@/lib/utils";
 import { GradientCardProps } from "@/types";
 import {
-    ArrowDown,
-    ArrowDownLeft,
-    ArrowDownRight,
-    ArrowLeft,
-    ArrowRight,
-    ArrowUp,
-    ArrowUpLeft,
-    ArrowUpRight
+  ArrowDown,
+  ArrowDownLeft,
+  ArrowDownRight,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUp,
+  ArrowUpLeft,
+  ArrowUpRight
 } from "phosphor-react";
 import { useState } from "react";
 
@@ -82,7 +82,7 @@ export function GradientCard({ gradient }: GradientCardProps) {
   const cssGradient = generateCSSFromTailwindColors(gradient.colors, gradient.direction);
 
   return (
-    <div className="group relative bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+    <div className="group flex flex-col relative bg-white rounded-xl shadow-xs border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
       {/* Badge TW */}
       <div className="absolute top-3 left-3 z-10">
         <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-mono font-medium bg-white/90 text-slate-700 shadow-sm border border-white/50 backdrop-blur-sm">
@@ -94,13 +94,15 @@ export function GradientCard({ gradient }: GradientCardProps) {
       <div className="absolute top-3 right-3 z-10">
         <div
           className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-white/90 text-slate-700 shadow-sm border border-white/50 backdrop-blur-sm"
-          title={DirectionNames[gradient.direction as keyof typeof DirectionNames]}
+          title={
+            DirectionNames[gradient.direction as keyof typeof DirectionNames]
+          }
         >
           {DirectionIcons[gradient.direction as keyof typeof DirectionIcons]}
         </div>
       </div>
 
-                        {/* Área do Gradiente */}
+      {/* Área do Gradiente */}
       <div
         className={`w-full aspect-[16/10] ${gradient.tailwindClasses} relative overflow-hidden`}
         style={{ background: cssGradient }}
@@ -114,34 +116,37 @@ export function GradientCard({ gradient }: GradientCardProps) {
             onClick={handleCopyColors}
             className="flex-1 px-3 py-2 bg-white/95 text-slate-700 rounded-lg font-medium text-sm shadow-lg hover:bg-white transition-all duration-200 backdrop-blur-sm border border-white/50"
           >
-            {copyStatus === 'colors' ? '✓ Copiado!' : 'Copiar Cores'}
+            {copyStatus === "colors" ? "✓ Copiado!" : "Copiar Cores"}
           </button>
           <button
             onClick={handleCopyClasses}
             className="flex-1 px-3 py-2 bg-slate-800/95 text-white rounded-lg font-medium text-sm shadow-lg hover:bg-slate-800 transition-all duration-200 backdrop-blur-sm"
           >
-            {copyStatus === 'classes' ? '✓ Copiado!' : 'Copiar Classes'}
+            {copyStatus === "classes" ? "✓ Copiado!" : "Copiar Classes"}
           </button>
         </div>
       </div>
 
       {/* Informações do Gradiente */}
-      <div className="p-4 space-y-3">
+      <div className="flex flex-col justify-between grow">
         {/* Cores Individuais */}
-        <div className="space-y-2">
+        <div className="space-y-2 p-4">
           <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
             Cores Tailwind
           </p>
-          <p className="font-mono text-sm text-slate-800 leading-relaxed">
+          <p className="font-mono text-sm text-slate-800 bg-slate-50 rounded-md px-3 py-2 leading-relaxed">
             {formatTailwindColorsDisplay(gradient.colors)}
           </p>
         </div>
 
+        <div className="h-[1px] bg-gray-100"></div>
+
         {/* Classes Tailwind */}
-        <div className="space-y-2">
+        <div className="space-y-2 p-4">
           <p className="text-xs font-medium text-slate-600 uppercase tracking-wide">
             Classes Tailwind
           </p>
+
           <p className="font-mono text-xs text-slate-700 bg-slate-50 rounded-md px-3 py-2 leading-relaxed break-all">
             {gradient.tailwindClasses}
           </p>

@@ -167,7 +167,7 @@ export function generateSeededTailwindGradient(index: number) {
  * @returns string - Cores formatadas para exibição
  */
 export function formatTailwindColorsDisplay(colors: string[]): string {
-  return `Cores: ${colors.join(', ')}`;
+  return colors.join(', ');
 }
 
 /**
