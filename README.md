@@ -191,6 +191,17 @@ npm run preview      # Build and serve locally
 npm start            # Start production server (not used for static export)
 ```
 
+### 🧪 Testing (Before CI/Deployment)
+```bash
+npm run pre-commit   # Quick test before commit (lint + types + build)
+npm run test:build   # Complete build test
+npm run test:ci      # Simulate CI environment
+
+# Platform-specific comprehensive tests
+./scripts/test-build.sh     # Linux/Mac
+.\scripts\test-build.ps1    # Windows PowerShell
+```
+
 ### Code Quality
 ```bash
 npm run lint         # Run ESLint

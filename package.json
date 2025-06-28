@@ -13,7 +13,11 @@
     "deploy:manual": "./scripts/deploy-manual.sh",
     "preview": "npm run build && npx serve out",
     "clean": "rm -rf .next out node_modules/.cache",
-    "reinstall": "rm -rf node_modules package-lock.json && npm cache clean --force && npm install"
+    "reinstall": "rm -rf node_modules package-lock.json && npm cache clean --force && npm install",
+    "test:build": "npm run clean && npm run lint && npm run type-check && npm run build",
+    "test:ci": "npm run test:build && npm run preview:test",
+    "preview:test": "npm run build && npx serve out --single --listen 3001 &",
+    "pre-commit": "npm run test:build && echo '✅ Build test passed! Safe to commit.'"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",

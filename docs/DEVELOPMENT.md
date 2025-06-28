@@ -145,6 +145,42 @@ export function GradientCard({ gradient, index }: GradientCardProps) {
 
 ## Testing
 
+### 🚀 Pre-CI Testing (Recommended)
+
+**SEMPRE teste o build localmente antes de fazer push para evitar falhas no GitHub Actions:**
+
+#### Opção 1: Scripts Dedicados (Mais Completo)
+```bash
+# Linux/Mac
+./scripts/test-build.sh
+
+# Windows PowerShell
+.\scripts\test-build.ps1
+
+# Windows PowerShell (pular servidor de teste)
+.\scripts\test-build.ps1 -SkipServer
+```
+
+#### Opção 2: Scripts NPM (Mais Rápido)
+```bash
+npm run pre-commit    # Teste rápido antes do commit
+npm run test:build    # Teste completo do build
+npm run test:ci       # Simula ambiente CI completo
+```
+
+### ⚡ Comandos Rápidos de Teste
+
+```bash
+# Teste rápido (lint + types + build)
+npm run pre-commit
+
+# Limpeza completa + build
+npm run clean && npm run build
+
+# Preview local do build
+npm run preview
+```
+
 ### Manual Testing Checklist
 - [ ] All 100 gradient cards render correctly
 - [ ] Copy functionality works for both colors and classes
@@ -164,6 +200,26 @@ npm run preview
 # Test static export
 npm run build
 npx serve out
+```
+
+### 🛠️ Fluxo Recomendado de Desenvolvimento
+
+```bash
+# 1. Fazer mudanças
+npm run dev
+
+# 2. Testar mudanças localmente
+# ... testar no browser ...
+
+# 3. SEMPRE testar build antes do commit
+npm run pre-commit
+
+# 4. Se tudo passou, fazer commit
+git add .
+git commit -m "feat: sua mudança"
+
+# 5. Push para GitHub
+git push origin main
 ```
 
 ## Troubleshooting
