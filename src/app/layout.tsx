@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fira_Code, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -17,7 +17,11 @@ export const metadata: Metadata = {
   description: "Application that generates 100 gradient cards using only official Tailwind CSS colors. Each card shows colors and ready-to-use Tailwind classes. Click to copy colors or classes.",
   keywords: ["tailwind", "gradients", "tailwind css", "colors", "design", "CSS", "Next.js", "tailwind classes"],
   authors: [{ name: "Tailwind Gradient Generator" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
