@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
 
+  // GitHub Pages configuration
+  basePath: process.env.NODE_ENV === 'production' ? '/gradienter' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/gradienter/' : '',
+
   // Image optimization disabled for static export
   images: {
     unoptimized: true,
