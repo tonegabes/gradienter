@@ -55,9 +55,13 @@ jobs:
         run: |
           echo "Cleaning any existing artifacts..."
           rm -rf .next out node_modules/.cache
-          echo "Installing dependencies with npm install..."
+          echo "Installing all dependencies (including TypeScript for build)..."
           npm install --prefer-offline --no-audit
           echo "Dependencies installed successfully"
+          echo ""
+          echo "Verifying TypeScript installation:"
+          npm ls typescript @types/react @types/node @types/react-dom
+          npx tsc --version
 
       - name: Verify project structure and dependencies
         run: |
