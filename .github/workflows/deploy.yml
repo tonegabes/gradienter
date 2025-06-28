@@ -51,29 +51,72 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
-      - name: Install dependencies
+      - name: Clean and install dependencies
         run: |
-          echo "Installing dependencies with npm install (not ci)..."
+          echo "Cleaning any existing artifacts..."
+          rm -rf .next out node_modules/.cache
+          echo "Installing dependencies with npm install..."
           npm install --prefer-offline --no-audit
           echo "Dependencies installed successfully"
 
-      - name: Verify TypeScript setup
+      - name: Verify project structure and dependencies
         run: |
           echo "=== Environment Information ==="
           echo "Node.js version: $(node --version)"
           echo "npm version: $(npm --version)"
+          echo "Working directory: $(pwd)"
           echo ""
-          echo "=== Checking TypeScript packages ==="
-          npm ls typescript @types/react @types/node @types/react-dom || echo "Some packages not found, continuing..."
+          echo "=== Project Structure ==="
+          echo "Checking src structure:"
+          find src -type f -name "*.tsx" -o -name "*.ts" | head -20
           echo ""
-          echo "=== TypeScript version ==="
-          npx tsc --version || echo "TypeScript not available via npx"
+          echo "=== TypeScript Configuration ==="
+          echo "tsconfig.json exists: $(test -f tsconfig.json && echo 'YES' || echo 'NO')"
+          if [ -f tsconfig.json ]; then
+            echo "Path aliases in tsconfig.json:"
+            cat tsconfig.json | grep -A 5 '"paths"' || echo "No paths found"
+          fi
           echo ""
-          echo "=== Package.json devDependencies ==="
-          cat package.json | grep -A 15 '"devDependencies"'
+          echo "=== Checking Dependencies ==="
+          npm ls typescript @types/react @types/node @types/react-dom tailwindcss || echo "Some packages not found, continuing..."
+          echo ""
+          echo "=== Module Resolution Test ==="
+          echo "Testing if components can be resolved:"
+          ls -la src/components/ || echo "Components directory not found"
+
+      - name: Pre-build checks
+        run: |
+          echo "=== Running pre-build checks ==="
+          echo "1. TypeScript compilation check:"
+          npm run type-check || echo "Type check failed, but continuing..."
+          echo ""
+          echo "2. ESLint check:"
+          npm run lint || echo "Lint failed, but continuing..."
+          echo ""
+          echo "3. Testing module resolution:"
+          node -e "
+            try {
+              const path = require('path');
+              const fs = require('fs');
+              const tsConfig = JSON.parse(fs.readFileSync('tsconfig.json', 'utf8'));
+              console.log('TypeScript config paths:', JSON.stringify(tsConfig.compilerOptions.paths, null, 2));
+
+              // Test if components exist
+              const componentsPath = path.join(process.cwd(), 'src', 'components');
+              const files = fs.readdirSync(componentsPath);
+              console.log('Components found:', files);
+
+              // Test specific file
+              const gradientGridPath = path.join(componentsPath, 'GradientGrid.tsx');
+              console.log('GradientGrid.tsx exists:', fs.existsSync(gradientGridPath));
+            } catch (error) {
+              console.error('Module resolution test failed:', error.message);
+            }
+          "
 
       - name: Build Next.js application (includes type checking and linting)
         run: |
+          echo "Starting Next.js build..."
           npm run build
           echo "Build completed successfully"
 

@@ -41,6 +41,17 @@ const nextConfig: NextConfig = {
     // Ignore ESLint errors in CI environment until dependencies are resolved
     ignoreDuringBuilds: process.env.CI === 'true',
   },
+
+  // Webpack configuration for path resolution
+  webpack: (config, { isServer }) => {
+    // Ensure path aliases work correctly in CI
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': require('path').resolve(__dirname, 'src'),
+    };
+
+    return config;
+  },
 };
 
 export default nextConfig;
