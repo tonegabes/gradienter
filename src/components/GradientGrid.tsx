@@ -1,8 +1,8 @@
 "use client";
 
-import { generateSeededTailwindGradient } from "@/lib/utils";
-import { GradientGridProps, TailwindGradientConfig } from "@/types";
 import { useMemo } from "react";
+import { generateSeededTailwindGradient } from "../lib/utils";
+import { GradientGridProps, TailwindGradientConfig } from "../types";
 import { GradientCard } from "./GradientCard";
 
 /**

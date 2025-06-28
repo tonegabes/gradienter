@@ -30,27 +30,15 @@ const nextConfig: NextConfig = {
     // Clean experimental config
   },
 
-  // TypeScript configuration - temporarily ignore errors in CI
+  // TypeScript and ESLint configurations
   typescript: {
-    // Ignore TypeScript errors in CI environment until dependencies are resolved
-    ignoreBuildErrors: process.env.CI === 'true',
+    // TypeScript errors will be caught during build
+    ignoreBuildErrors: false,
   },
 
-  // ESLint configuration - temporarily ignore errors in CI
   eslint: {
-    // Ignore ESLint errors in CI environment until dependencies are resolved
-    ignoreDuringBuilds: process.env.CI === 'true',
-  },
-
-  // Webpack configuration for path resolution
-  webpack: (config, { isServer }) => {
-    // Ensure path aliases work correctly in CI
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@': require('path').resolve(__dirname, 'src'),
-    };
-
-    return config;
+    // ESLint errors will be caught during build
+    ignoreDuringBuilds: false,
   },
 };
 

@@ -1,4 +1,4 @@
-import { GradientGrid } from "@/components/GradientGrid";
+import { GradientGrid } from "../components/GradientGrid";
 
 /**
  * Main application page

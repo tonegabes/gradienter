@@ -1,23 +1,23 @@
 "use client";
 
 import {
-  copyToClipboard,
-  formatTailwindColorsDisplay,
-  generateCSSFromTailwindColors
-} from "@/lib/utils";
-import { GradientCardProps } from "@/types";
-import {
-  ArrowDown,
-  ArrowDownLeft,
-  ArrowDownRight,
-  ArrowLeft,
-  ArrowRight,
-  ArrowUp,
-  ArrowUpLeft,
-  ArrowUpRight,
-  Copy
+    ArrowDown,
+    ArrowDownLeft,
+    ArrowDownRight,
+    ArrowLeft,
+    ArrowRight,
+    ArrowUp,
+    ArrowUpLeft,
+    ArrowUpRight,
+    Copy
 } from "phosphor-react";
 import { useState } from "react";
+import {
+    copyToClipboard,
+    formatTailwindColorsDisplay,
+    generateCSSFromTailwindColors
+} from "../lib/utils";
+import { GradientCardProps } from "../types";
 
 /**
  * Ícones Phosphor para direções de gradiente
