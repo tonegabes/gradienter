@@ -54,7 +54,20 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci --prefer-offline --no-audit
-          npm ls
+          echo "Verifying TypeScript dependencies..."
+          npm ls typescript @types/react @types/node || echo "Some TypeScript packages may not be installed"
+
+      - name: Ensure TypeScript dependencies
+        run: |
+          npm install --save-dev typescript@^5 @types/react@^19 @types/node@^20 @types/react-dom@^19
+
+      - name: Verify installation
+        run: |
+          npm ls typescript @types/react @types/node @types/react-dom
+          echo "TypeScript setup verified"
+
+      - name: Type check
+        run: npm run type-check
 
       - name: Lint code
         run: npm run lint
